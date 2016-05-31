@@ -19,6 +19,7 @@ def main():
 	j = 0
 
 	for i in xrange(doc_num):
+
 		# Creating the tex file which is about to be generated from the template
 		file_name = "certificate_" + str(i) + ".tex"
 		file_new = open(file_name, "wb")
