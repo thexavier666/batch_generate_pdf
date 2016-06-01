@@ -8,24 +8,36 @@ def main():
 		print "Usage : python pyscript <template file name> <csv file name> <number of documents to be generated>"
 		sys.exit()
 
+	# Checking if given template is a tex file or not
+	if sys.argv[1][-4:] != '.tex':
+		print "Invalid template file!"
+		sys.exit()
+
+	# Checking is given database is a csv file or not
+	elif sys.argv[2][-4:] != '.csv':
+		print "Invalid csv file!"
+		sys.exit()
+
 	# Opening csv file
 	csvf 		= open(sys.argv[2], 'rb')
 	rd 		= csv.reader(csvf)
 	csv_list 	= map(tuple, rd)
 
-	# Getting number of documents to be generater
+	# Getting number of documents to be generator
 	doc_num = int(sys.argv[3])
-
-	j = 0
 
 	for i in xrange(doc_num):
 
 		# Creating the tex file which is about to be generated from the template
-		file_name = "certificate_" + str(i) + ".tex"
-		file_new = open(file_name, "wb")
+		file_name = sys.argv[1][0:-4] + "_" + str(i+1)
+		file_name_tex = file_name + ".tex"
+		file_new = open(file_name_tex, "wb")
 
 		# Opening the template file
 		template_file = open(sys.argv[1],'r')
+
+		# Parameter index in the csv file
+		j = 0
 
 		# Copying the template line by line and replacing the parameters
 		for line in template_file:
@@ -35,14 +47,17 @@ def main():
 				file_new.write(line.replace('$PARAM$', csv_list[i][j]))
 				j = j + 1
 
-		j = 0
-
 		template_file.close()
 		file_new.close()
 
 		# Generating the pdf from the newly generated latex file
-		sys_call = ["pdflatex", file_name]
-		subprocess.call(sys_call)
+		sys_call1 = ["pdflatex", file_name]
+		sys_call2 = ["rm", file_name + ".log"]
+		sys_call3 = ["rm", file_name + ".aux"]
+		
+		subprocess.call(sys_call1)
+		subprocess.call(sys_call2)
+		subprocess.call(sys_call3)
 
 if __name__ == "__main__":
 	main()

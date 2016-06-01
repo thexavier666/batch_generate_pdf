@@ -1,5 +1,4 @@
 # Batch Generate PDFs
-
 This Python script will generate pdf files if it is given a latex template file and csv file consisting of list of items to be entered
 
 ### Latex File Template
@@ -31,13 +30,14 @@ In this example, three documents can be created but not more
 ### Usage
 This is the usage script 
 `python pyscript <template file name> <csv file name> <number of documents to be generated>`
-* First argument : Name of template file. It should be in `.tex` format
-* Second argument : Name of the csv file
-* Third argument : Number of documents to be generated. It should not be more than the number of rows of the csv file
+* First argument  : Name of template file. It should be in `.tex` format
+* Second argument : Name of the csv file. It should be in `.csv` format
+* Third argument  : Number of documents to be generated. It should not be more than the number of rows of the csv file
 
 ### Output
-PDF files will be generated with the name `certificate_<file number>.pdf`
+PDF files will be generated with the name `<template file name>_<file number>.pdf`
+File numbers start from 1 to `<number of documents to be generated>`
 
 ### Sample Running String
-Run the following script to get an understanding
-`python pyscript.py sample_files/template.tex sample_files/namelist.csv 4`
+Run the following script to get an understanding. Sample files are provided
+`python pyscript.py sample_template.tex sample_namelist.csv 4`
