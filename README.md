@@ -1,6 +1,10 @@
 # Batch Generate PDFs
 This Python script will generate pdf files if it is given a latex template file and csv file consisting of list of items to be entered
 
+### Prerequisites
+`pdflatex` should be installed
+`python` should be installed
+
 ### Latex File Template
 Items which are required to be replaced need to be written as `$PARAM$`. Let's look at the following file
  

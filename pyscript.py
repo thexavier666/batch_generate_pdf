@@ -29,9 +29,9 @@ def main():
 	for i in xrange(doc_num):
 
 		# Creating the tex file which is about to be generated from the template
-		file_name = sys.argv[1][0:-4] + "_" + str(i+1)
-		file_name_tex = file_name + ".tex"
-		file_new = open(file_name_tex, "wb")
+		file_name 	= sys.argv[1][0:-4] + "_" + str(i+1)
+		file_name_tex 	= file_name + ".tex"
+		file_new 	= open(file_name_tex, "wb")
 
 		# Opening the template file
 		template_file = open(sys.argv[1],'r')
@@ -43,6 +43,7 @@ def main():
 		for line in template_file:
 			if line.find('$PARAM$') is -1:
 				file_new.write(line)
+
 			else:
 				file_new.write(line.replace('$PARAM$', csv_list[i][j]))
 				j = j + 1
@@ -52,12 +53,10 @@ def main():
 
 		# Generating the pdf from the newly generated latex file
 		sys_call1 = ["pdflatex", file_name]
-		sys_call2 = ["rm", file_name + ".log"]
-		sys_call3 = ["rm", file_name + ".aux"]
+		sys_call2 = ["rm", file_name + ".log", file_name + ".aux"]
 		
 		subprocess.call(sys_call1)
 		subprocess.call(sys_call2)
-		subprocess.call(sys_call3)
 
 if __name__ == "__main__":
 	main()
